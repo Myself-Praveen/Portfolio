@@ -137,6 +137,18 @@ const COMMAND_MAP = {
     "Engineered an NLP classification engine using TF-IDF vectorization and Scikit-learn, achieving 92% accuracy.",
     "<em>Tech: Python, Scikit-learn, TF-IDF, NLTK, Pandas</em>",
     "<br/>",
+    "<strong>BlunderBot Chess Engine</strong>",
+    "Distributed AI chess platform featuring semantic board search using custom autoencoders and a Neo4j GraphRAG opening pipeline.",
+    "<br/>",
+    "<strong>Umbrella3 DeFi Infrastructure</strong>",
+    "A blockchain-based disaster relief vault system utilizing Solidity smart contracts and Chainlink oracles.",
+    "<br/>",
+    "<strong>Traffic Demand Prediction Pipeline</strong>",
+    "An advanced spatial-temporal stacking ensemble (LightGBM/XGBoost/CatBoost) built for the HackerEarth Gridlock Hackathon.",
+    "<br/>",
+    "<strong>API Waste Terminator</strong>",
+    "An autonomous agent integrated with GitLab to detect leaked API keys and optimize expensive LLM prompts.",
+    "<br/>",
     "Type <cmd>cd projects</cmd> then <cmd>ls</cmd> to view files, or check my <cmd>github</cmd>!"
   ],
   experience: [
@@ -190,7 +202,7 @@ Context about Praveen:
 - Languages: C, C++, Python, SQL, JavaScript, HTML, CSS, RISC-V Assembly, Bash.
 - Frameworks/Libraries: PyTorch, TensorFlow, Scikit-learn, HuggingFace, LangChain, React.js, Node.js.
 - Experience: Google Campus Ambassador, EA Sports Virtual Experience (C++ optimization), McKinsey Forward Learning Program.
-- Projects: LUMA Compiler Engine (C, Flex, Bison, RISC-V), CodeSage (Python, LangChain, Ollama, RAG), Fake News Detection Engine (NLP, Scikit-learn).
+- Projects: LUMA Compiler Engine (C, Flex, Bison, RISC-V), CodeSage (Python, LangChain, Ollama, RAG), Fake News Detection Engine (NLP, Scikit-learn), BlunderBot (AI Chess), Umbrella3 (DeFi), Traffic Prediction (ML), API Terminator (AI Agent).
 - Achievements: CodeChef 1487, Codeforces 1200+, NPTEL Generative AI Silver, solved 500+ DSA.
 - Contact: praveen104685@gmail.com, Kanpur, UP.
 
@@ -236,7 +248,7 @@ function App() {
   
   const DIRECTORY_STRUCTURE = {
     '~': ['projects/', 'skills.txt', 'about.txt', 'experience.txt'],
-    '~/projects': ['luma_compiler.txt', 'codesage.txt', 'fake_news.txt']
+    '~/projects': ['luma_compiler.txt', 'codesage.txt', 'fake_news.txt', 'blunderbot.txt', 'umbrella3.txt', 'traffic.txt', 'api_terminator.txt']
   };
 
   const FILE_CONTENTS = {
@@ -245,7 +257,11 @@ function App() {
     '~/experience.txt': COMMAND_MAP.experience,
     '~/projects/luma_compiler.txt': ["<span class='highlight'>LUMA Compiler Engine</span>", "Engineered a complete 7-phase compiler from scratch in C, translating a custom C-like language into executable 32-bit RISC-V assembly."],
     '~/projects/codesage.txt': ["<span class='highlight'>CodeSage – AI Code Analysis Assistant</span>", "Architected a CLI code-analysis assistant utilizing local LLMs via Ollama and a RAG pipeline."],
-    '~/projects/fake_news.txt': ["<span class='highlight'>Fake News Detection Engine</span>", "NLP classification engine analyzing 20,000+ unstructured news articles using TF-IDF and Scikit-learn."]
+    '~/projects/fake_news.txt': ["<span class='highlight'>Fake News Detection Engine</span>", "NLP classification engine analyzing 20,000+ unstructured news articles using TF-IDF and Scikit-learn."],
+    '~/projects/blunderbot.txt': ["<span class='highlight'>BlunderBot Chess Engine</span>", "Distributed AI chess platform with Neo4j GraphRAG and FastAPI."],
+    '~/projects/umbrella3.txt': ["<span class='highlight'>Umbrella3 DeFi Infrastructure</span>", "Smart contract development with Solidity/Hardhat."],
+    '~/projects/traffic.txt': ["<span class='highlight'>Traffic Demand Prediction Pipeline</span>", "Stacking ensemble achieving 93.12 R2 score."],
+    '~/projects/api_terminator.txt': ["<span class='highlight'>API Waste Terminator</span>", "Autonomous agent scanning codebases for leaked API keys."]
   };
   
   const inputRef = useRef(null);
