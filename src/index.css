@@ -53,6 +53,25 @@ body.theme-hub {
   --secondary-color: #999999;
 }
 
+body.matrix-theme {
+  --text-color: #00ff00 !important;
+  --prompt-user: #00ff00 !important;
+  --prompt-dir: #00ff00 !important;
+  --prompt-arrow: #00ff00 !important;
+  --highlight-color: #00ff00 !important;
+  --secondary-color: #00ff00 !important;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5) !important;
+}
+
+body.matrix-theme .link {
+  color: #00ff00 !important;
+  text-decoration-color: #00ff00 !important;
+}
+
+body.matrix-theme .interactive-cmd {
+  color: #00ff00 !important;
+}
+
 * { box-sizing: border-box; }
 
 body {

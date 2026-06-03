@@ -1,6 +1,64 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+const MatrixRain = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
+    
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    
+    const rainDrops = [];
+    for (let x = 0; x < columns; x++) {
+      rainDrops[x] = 1;
+    }
+    
+    const draw = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
+      
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+        
+        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          rainDrops[i] = 0;
+        }
+        rainDrops[i]++;
+      }
+    };
+    
+    const interval = setInterval(draw, 30);
+    
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: 0, width: '100vw', height: '100vh', pointerEvents: 'none', backgroundColor: '#000' }} />;
+};
+
 const getLoginMessage = () => {
   const date = new Date();
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -25,17 +83,22 @@ const WELCOME_MESSAGE = [
 const COMMAND_MAP = {
   help: [
     "Available commands:",
-    "  <cmd>about</cmd>     - Learn more about me",
-    "  <cmd>skills</cmd>    - List my technical skills",
-    "  <cmd>projects</cmd>  - View my recent work",
-    "  <cmd>experience</cmd>- View my work experience",
-    "  <cmd>github</cmd>           - Fetch live repositories from GitHub API",
-    "  <cmd>coding profiles</cmd>  - View my competitive coding profiles",
-    "  <cmd>contact</cmd>          - How to reach me",
-    "  <cmd>socials</cmd>   - Links to GitHub, LinkedIn, X, Insta",
-    "  <cmd>theme</cmd>     - Change terminal theme (e.g., 'theme dracula')",
-    "  <cmd>clear</cmd>     - Clear the terminal screen",
-    "  <cmd>setkey</cmd>    - Set your Gemini API key to enable AI features",
+    "  <cmd>about</cmd>           - Learn more about me",
+    "  <cmd>skills</cmd>          - List my technical skills",
+    "  <cmd>projects</cmd>        - View my recent work",
+    "  <cmd>experience</cmd>      - View my work experience",
+    "  <cmd>github</cmd>          - Fetch live repositories from GitHub API",
+    "  <cmd>coding profiles</cmd> - View my competitive coding profiles",
+    "  <cmd>contact</cmd>         - How to reach me",
+    "  <cmd>socials</cmd>         - Links to GitHub, LinkedIn, X, Insta",
+    "  <cmd>theme</cmd>           - Change terminal theme (e.g., 'theme dracula')",
+    "  <cmd>ls</cmd>              - List directory contents",
+    "  <cmd>cd</cmd>              - Change directory (e.g., 'cd projects')",
+    "  <cmd>cat</cmd>             - Read a file (e.g., 'cat about.txt')",
+    "  <cmd>matrix</cmd>          - Enter the Matrix",
+    "  <cmd>sudo rm -rf /</cmd>   - Do not run this.",
+    "  <cmd>clear</cmd>           - Clear the terminal screen",
+    "  <cmd>setkey</cmd>          - Set your Gemini API key to enable AI features",
     ""
   ],
   about: [
@@ -156,6 +219,32 @@ function App() {
   const [isThinking, setIsThinking] = useState(false);
   const [sessionKey, setSessionKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || '');
   
+  // Draggable window state
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const dragRef = useRef({ isDragging: false, startX: 0, startY: 0 });
+  
+  // Easter eggs
+  const [systemCrashed, setSystemCrashed] = useState(false);
+  const [matrixMode, setMatrixMode] = useState(false);
+  
+  // File system state
+  const [currentDir, setCurrentDir] = useState('~');
+  
+  const DIRECTORY_STRUCTURE = {
+    '~': ['projects/', 'skills.txt', 'about.txt', 'experience.txt'],
+    '~/projects': ['blunderbot.txt', 'umbrella3.txt', 'traffic.txt', 'api_terminator.txt']
+  };
+
+  const FILE_CONTENTS = {
+    '~/about.txt': COMMAND_MAP.about,
+    '~/skills.txt': COMMAND_MAP.skills,
+    '~/experience.txt': COMMAND_MAP.experience,
+    '~/projects/blunderbot.txt': ["<span class='highlight'>BlunderBot Chess Engine</span>", "Distributed AI chess platform with Neo4j GraphRAG and FastAPI."],
+    '~/projects/umbrella3.txt': ["<span class='highlight'>Umbrella3 DeFi Infrastructure</span>", "Smart contract development with Solidity/Hardhat."],
+    '~/projects/traffic.txt': ["<span class='highlight'>Traffic Demand Prediction Pipeline</span>", "Stacking ensemble achieving 93.12 R2 score."],
+    '~/projects/api_terminator.txt': ["<span class='highlight'>API Waste Terminator</span>", "Autonomous agent scanning codebases for leaked API keys."]
+  };
+  
   const inputRef = useRef(null);
   const endRef = useRef(null);
   
@@ -178,8 +267,8 @@ function App() {
   }, [booting, bootLogIndex]);
 
   useEffect(() => {
-    document.body.className = theme === 'default' ? '' : `theme-${theme}`;
-  }, [theme]);
+    document.body.className = `theme-${theme} ${matrixMode ? 'matrix-theme' : ''}`;
+  }, [theme, matrixMode]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -191,9 +280,38 @@ function App() {
         inputRef.current?.focus();
       }
     };
+    
+    const handleMouseMove = (e) => {
+      if (dragRef.current.isDragging) {
+        setPosition({
+          x: e.clientX - dragRef.current.startX,
+          y: e.clientY - dragRef.current.startY
+        });
+      }
+    };
+
+    const handleMouseUp = () => {
+      dragRef.current.isDragging = false;
+    };
+
     document.addEventListener('click', handleGlobalClick);
-    return () => document.removeEventListener('click', handleGlobalClick);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    
+    return () => {
+      document.removeEventListener('click', handleGlobalClick);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
   }, []);
+
+  const handleMouseDown = (e) => {
+    dragRef.current = {
+      isDragging: true,
+      startX: e.clientX - position.x,
+      startY: e.clientY - position.y
+    };
+  };
 
   const askAI = async (query, currentHistory) => {
     if (!sessionKey) {
@@ -253,6 +371,59 @@ function App() {
 
     if (normalized === 'clear') {
       setHistory([]);
+      return;
+    }
+    
+    if (normalized === 'sudo rm -rf /') {
+      setHistory([...newHistory, { type: 'output', content: [
+        "<span class='error'>WARNING: ROOT PRIVILEGES INVOKED</span>",
+        "Deleting /boot...",
+        "Deleting /sys...",
+        "KERNEL PANIC - NOT SYNCING: FATAL EXCEPTION",
+        "..."
+      ]}]);
+      setTimeout(() => setSystemCrashed(true), 1500);
+      return;
+    }
+
+    if (normalized === 'matrix') {
+      setMatrixMode(!matrixMode);
+      setHistory([...newHistory, { type: 'output', content: [`<span class='success'>Matrix mode ${!matrixMode ? 'engaged' : 'disabled'}.</span>`] }]);
+      return;
+    }
+    
+    // File system commands
+    if (normalized === 'ls') {
+      const contents = DIRECTORY_STRUCTURE[currentDir] || [];
+      setHistory([...newHistory, { type: 'output', content: [contents.join('  ')] }]);
+      return;
+    }
+
+    if (normalized.startsWith('cd ')) {
+      const target = normalized.split(' ')[1];
+      if (target === '..' || target === '../') {
+        setCurrentDir('~');
+      } else if (target === 'projects' || target === 'projects/') {
+        setCurrentDir('~/projects');
+      } else if (target === '~' || target === '') {
+        setCurrentDir('~');
+      } else {
+        setHistory([...newHistory, { type: 'output', content: [`<span class='error'>cd: no such file or directory: ${target}</span>`] }]);
+        return;
+      }
+      setHistory([...newHistory]); // Just update prompt
+      return;
+    }
+
+    if (normalized.startsWith('cat ')) {
+      const file = normalized.split(' ')[1];
+      const fullPath = currentDir === '~' ? `~/${file}` : `${currentDir}/${file}`;
+      
+      if (FILE_CONTENTS[fullPath]) {
+        setHistory([...newHistory, { type: 'output', content: FILE_CONTENTS[fullPath] }]);
+      } else {
+        setHistory([...newHistory, { type: 'output', content: [`<span class='error'>cat: ${file}: No such file</span>`] }]);
+      }
       return;
     }
 
@@ -389,6 +560,14 @@ function App() {
   };
 
   const renderPromptPrefix = () => {
+    if (matrixMode) {
+      return (
+        <div className="prompt-line" style={{ fontWeight: 'bold' }}>
+          <span style={{ color: '#00ff00' }}>neo@matrix:{currentDir}</span>
+          <span className="prompt-arrow" style={{ color: '#00ff00', marginLeft: '8px' }}>❯</span>
+        </div>
+      );
+    }
     if (theme === 'hub') {
       return (
         <div className="prompt-line" style={{ fontWeight: 'bold', fontSize: '1.1em' }}>
@@ -411,17 +590,31 @@ function App() {
         <span className="prompt-at">@</span>
         <span className="prompt-user">praveen</span>
         <span className="prompt-at">:</span>
-        <span className="prompt-dir">~/portfolio</span>
+        <span className="prompt-dir">{currentDir}</span>
         <span className="prompt-git">git:(main)</span>
         <span className="prompt-arrow">❯</span>
       </div>
     );
   };
 
+  if (systemCrashed) {
+    return (
+      <div style={{ backgroundColor: '#000', color: '#f00', height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'monospace', fontSize: '24px', flexDirection: 'column' }}>
+        <div>KERNEL PANIC</div>
+        <div style={{ fontSize: '14px', marginTop: '20px' }}>System halted. Refresh to reboot.</div>
+      </div>
+    );
+  }
+
   return (
     <div className="window-container">
-      <div className="window-frame" onClick={() => !booting && inputRef.current?.focus()}>
-        <div className="window-header">
+      {matrixMode && <MatrixRain />}
+      <div 
+        className="window-frame" 
+        onClick={() => !booting && inputRef.current?.focus()}
+        style={{ transform: `translate(${position.x}px, ${position.y}px)`, zIndex: 10 }}
+      >
+        <div className="window-header" onMouseDown={handleMouseDown} style={{ cursor: 'grab' }}>
           <div className="mac-btn close"></div>
           <div className="mac-btn minimize"></div>
           <div className="mac-btn maximize"></div>
