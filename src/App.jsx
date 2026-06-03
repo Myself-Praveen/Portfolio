@@ -108,57 +108,61 @@ const COMMAND_MAP = {
     ""
   ],
   about: [
-    "Hello! I am Praveen, a passionate Software Engineer and Hackathon Enthusiast.",
-    "I specialize in full-stack development, AI/ML pipelines, and building robust backend architectures.",
-    "Currently, I'm working on several exciting projects including 'BlunderBot', a distributed AI chess platform.",
-    "I love turning complex problems into elegant, efficient, and scalable solutions."
+    "I am Praveen Mishra, a passionate Software Engineer and B.Tech CSE student at IIITDM Kurnool (CGPA: 8.21).",
+    "I specialize in Full-Stack Development, AI/ML Pipelines, and Systems Architecture.",
+    "Beyond coding, I've served as a Google Campus Ambassador, evangelizing Gemini AI, and I play Table Tennis for my institute.",
+    "",
+    "Feel free to ask the AI agent any questions about my background!"
   ],
   skills: [
-    "<span class='highlight'>[+] Languages:</span>",
-    "    Python, JavaScript, TypeScript, Solidity, C++, HTML/CSS",
-    "",
-    "<span class='highlight'>[+] Frameworks & Libraries:</span>",
-    "    React, Next.js, Node.js, Express, FastAPI, Tailwind CSS",
-    "",
-    "<span class='highlight'>[+] Tools & Infrastructure:</span>",
-    "    Git, Docker, Linux, Neo4j, Redis, MongoDB, PostgreSQL",
-    "",
-    "<span class='highlight'>[+] AI & Machine Learning:</span>",
-    "    PyTorch, TensorFlow, Scikit-learn, LLMs, RAG Architectures"
+    "My Technical Arsenal:",
+    "  <span class='highlight'>Languages:</span>       C, C++, Python, SQL, JavaScript, HTML, CSS, RISC-V Assembly, Bash",
+    "  <span class='highlight'>Frameworks:</span>      PyTorch, TensorFlow, Scikit-learn, HuggingFace, LangChain, React.js, Node.js",
+    "  <span class='highlight'>Tools:</span>           Git, Docker, Linux, Postman, VS Code, REST APIs, Flex, Bison, Ollama",
+    "  <span class='highlight'>Databases:</span>       MongoDB, MySQL, FAISS, PostgreSQL",
+    "  <span class='highlight'>Core Concepts:</span>   DSA, OOP, Compiler Design, NLP, Machine Learning, RAG"
   ],
   projects: [
-    "<span class='highlight'>1. BlunderBot Chess Engine</span>",
-    "   - Distributed AI chess platform with Neo4j GraphRAG and FastAPI.",
-    "   - Custom convolutional autoencoder embeddings.",
-    "",
-    "<span class='highlight'>2. Umbrella3 DeFi Infrastructure</span>",
-    "   - Smart contract development with Solidity/Hardhat.",
-    "   - Chainlink multi-oracle disaster verification.",
-    "",
-    "<span class='highlight'>3. Traffic Demand Prediction Pipeline</span>",
-    "   - Stacking ensemble (LightGBM, XGBoost, CatBoost) achieving 93.12 R2 score.",
-    "   - Spatial-temporal feature engineering.",
-    "",
-    "<span class='highlight'>4. API Waste Terminator</span>",
-    "   - Autonomous agent scanning codebases for leaked API keys.",
-    "   - React/Vite dashboard, GitLab MCP integration."
+    "Here are my recent projects:",
+    "<br/>",
+    "<strong>LUMA Compiler Engine</strong>",
+    "Engineered a complete 7-phase compiler from scratch in C, translating a custom C-like language into executable 32-bit RISC-V assembly.",
+    "<em>Tech: C, Flex, Bison, AST, RISC-V Assembly</em>",
+    "<br/>",
+    "<strong>CodeSage – AI Code Analysis Assistant</strong>",
+    "Architected a CLI code-analysis assistant utilizing local LLMs via Ollama and a RAG pipeline with LangChain/FAISS.",
+    "<em>Tech: Python, LangChain, Ollama, RAG, FAISS</em>",
+    "<br/>",
+    "<strong>Fake News Detection Engine</strong>",
+    "Engineered an NLP classification engine using TF-IDF vectorization and Scikit-learn, achieving 92% accuracy.",
+    "<em>Tech: Python, Scikit-learn, TF-IDF, NLTK, Pandas</em>",
+    "<br/>",
+    "Type <cmd>cd projects</cmd> then <cmd>ls</cmd> to view files, or check my <cmd>github</cmd>!"
   ],
   experience: [
-    "<span class='highlight'>[2026] Hackathon Conqueror</span>",
-    "   - HackHazards '26: Built Umbrella3 DeFi Infrastructure.",
-    "   - HackerEarth Traffic Demand: Deployed ML Stacking Ensembles.",
-    "   - Rapid Agent Hackathon: Developed API Waste Terminator.",
-    "",
-    "<span class='highlight'>[2025] Independent Developer</span>",
-    "   - Developed 'College Lost and Found' platform.",
-    "   - Authored extensive Notion-style programming documentation."
+    "Work Experience & Leadership:",
+    "<br/>",
+    "<strong>Google Campus Ambassador</strong> (Aug 2025 - Dec 2025)",
+    "Drove Google Gemini adoption across campus by conducting 3+ hands-on workshops and hackathons, onboarding 100+ students.",
+    "<br/>",
+    "<strong>Software Engineering Virtual Experience (EA Sports)</strong> (Apr 2025)",
+    "Patched a critical C++ memory leak optimizing execution overhead by 15%, and designed modular object class definitions.",
+    "<br/>",
+    "<strong>McKinsey Forward Learning Program</strong> (Dec 2025)",
+    "Applied structured analytical frameworks and formulated data-driven insights across real-world business case simulations.",
+    "<br/>",
+    "<strong>Sub Coordinator - Ledger Labs (Web3 Club)</strong>",
+    "Organize Web3 technical sessions and drive awareness of decentralized technologies.",
+    "<br/>",
+    "<strong>Vice Captain - Institute Table Tennis Team</strong>",
+    "Coordinate weekly training schedules for Inter-IIIT sports tournaments."
   ],
   contact: [
     "Let's build something awesome together!",
     "",
-    "Email:   <a href='mailto:praveen@example.com' class='link'>praveen@example.com</a>",
-    "Phone:   +1-555-019-2834",
-    "Address: Silicon Valley, CA"
+    "Email:   <a href='mailto:praveen104685@gmail.com' class='link'>praveen104685@gmail.com</a>",
+    "Phone:   +91 91209 82575",
+    "Address: Kanpur, UP, India"
   ],
   socials: [
     "GitHub:      <a href='https://github.com/Myself-Praveen' target='_blank' class='link'>github.com/Myself-Praveen</a>",
@@ -179,22 +183,16 @@ const COMMAND_MAP = {
 
 const COMMAND_LIST = Object.keys(COMMAND_MAP);
 
-const SYSTEM_PROMPT = `You are the AI assistant built into the terminal portfolio of Praveen, a passionate Software Engineer and Hackathon Enthusiast. 
+const SYSTEM_PROMPT = `You are the AI assistant built into the terminal portfolio of Praveen Mishra, a passionate Software Engineer and Hackathon Enthusiast. 
 Your job is to answer questions about Praveen based on his resume, GitHub, and LinkedIn profile context.
 Context about Praveen:
-- Education: B.S. in Computer Science (2027), AI & Distributed Systems focus.
-- Languages: Python, JavaScript, TypeScript, Solidity, C++, HTML/CSS.
-- Frameworks: React, Next.js, Node.js, Express, FastAPI, Tailwind CSS.
-- Infrastructure/DBs: Git, Docker, Linux, Neo4j, Redis, MongoDB, PostgreSQL.
-- ML/AI: PyTorch, TensorFlow, Scikit-learn, LLMs, RAG Architectures.
-- Projects: 
-  1. BlunderBot Chess Engine (Distributed AI chess platform with Neo4j GraphRAG and FastAPI)
-  2. Umbrella3 DeFi Infrastructure (Smart contracts, Solidity/Hardhat, Chainlink multi-oracle)
-  3. Traffic Demand Prediction Pipeline (Stacking ensemble LightGBM, XGBoost, CatBoost with 93.12 R2 score)
-  4. API Waste Terminator (Autonomous agent scanning codebases for leaked API keys, React/Vite dashboard, GitLab MCP integration)
-- Experience: HackHazards '26, HackerEarth Traffic Demand, Rapid Agent Hackathon, developed 'College Lost and Found' platform.
-- Contact: praveen@example.com, Silicon Valley, CA.
-- Socials: GitHub (github.com/Myself-Praveen), LinkedIn (linkedin.com/in/praveen).
+- Education: B.Tech in Computer Science and Engineering at IIITDM Kurnool (2024-2028, CGPA: 8.21).
+- Languages: C, C++, Python, SQL, JavaScript, HTML, CSS, RISC-V Assembly, Bash.
+- Frameworks/Libraries: PyTorch, TensorFlow, Scikit-learn, HuggingFace, LangChain, React.js, Node.js.
+- Experience: Google Campus Ambassador, EA Sports Virtual Experience (C++ optimization), McKinsey Forward Learning Program.
+- Projects: LUMA Compiler Engine (C, Flex, Bison, RISC-V), CodeSage (Python, LangChain, Ollama, RAG), Fake News Detection Engine (NLP, Scikit-learn).
+- Achievements: CodeChef 1487, Codeforces 1200+, NPTEL Generative AI Silver, solved 500+ DSA.
+- Contact: praveen104685@gmail.com, Kanpur, UP.
 
 Instructions:
 - Answer in 1 to 3 short sentences. Be concise.
@@ -238,17 +236,16 @@ function App() {
   
   const DIRECTORY_STRUCTURE = {
     '~': ['projects/', 'skills.txt', 'about.txt', 'experience.txt'],
-    '~/projects': ['blunderbot.txt', 'umbrella3.txt', 'traffic.txt', 'api_terminator.txt']
+    '~/projects': ['luma_compiler.txt', 'codesage.txt', 'fake_news.txt']
   };
 
   const FILE_CONTENTS = {
     '~/about.txt': COMMAND_MAP.about,
     '~/skills.txt': COMMAND_MAP.skills,
     '~/experience.txt': COMMAND_MAP.experience,
-    '~/projects/blunderbot.txt': ["<span class='highlight'>BlunderBot Chess Engine</span>", "Distributed AI chess platform with Neo4j GraphRAG and FastAPI."],
-    '~/projects/umbrella3.txt': ["<span class='highlight'>Umbrella3 DeFi Infrastructure</span>", "Smart contract development with Solidity/Hardhat."],
-    '~/projects/traffic.txt': ["<span class='highlight'>Traffic Demand Prediction Pipeline</span>", "Stacking ensemble achieving 93.12 R2 score."],
-    '~/projects/api_terminator.txt': ["<span class='highlight'>API Waste Terminator</span>", "Autonomous agent scanning codebases for leaked API keys."]
+    '~/projects/luma_compiler.txt': ["<span class='highlight'>LUMA Compiler Engine</span>", "Engineered a complete 7-phase compiler from scratch in C, translating a custom C-like language into executable 32-bit RISC-V assembly."],
+    '~/projects/codesage.txt': ["<span class='highlight'>CodeSage – AI Code Analysis Assistant</span>", "Architected a CLI code-analysis assistant utilizing local LLMs via Ollama and a RAG pipeline."],
+    '~/projects/fake_news.txt': ["<span class='highlight'>Fake News Detection Engine</span>", "NLP classification engine analyzing 20,000+ unstructured news articles using TF-IDF and Scikit-learn."]
   };
   
   const inputRef = useRef(null);
