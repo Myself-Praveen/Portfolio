@@ -92,13 +92,19 @@ const COMMAND_MAP = {
     "  <cmd>contact</cmd>         - How to reach me",
     "  <cmd>socials</cmd>         - Links to GitHub, LinkedIn, X, Insta",
     "  <cmd>theme</cmd>           - Change terminal theme (e.g., 'theme dracula')",
+    "  <cmd>features</cmd>        - View interactive terminal features & easter eggs",
+    "  <cmd>clear</cmd>           - Clear the terminal screen",
+    "  <cmd>setkey</cmd>          - Set your Gemini API key to enable AI features",
+    ""
+  ],
+  features: [
+    "Interactive Terminal Features & Easter Eggs:",
     "  <cmd>ls</cmd>              - List directory contents",
     "  <cmd>cd</cmd>              - Change directory (e.g., 'cd projects')",
     "  <cmd>cat</cmd>             - Read a file (e.g., 'cat about.txt')",
     "  <cmd>matrix</cmd>          - Enter the Matrix",
+    "  <cmd>escape</cmd>          - Escape the Matrix",
     "  <cmd>sudo rm -rf /</cmd>   - Do not run this.",
-    "  <cmd>clear</cmd>           - Clear the terminal screen",
-    "  <cmd>setkey</cmd>          - Set your Gemini API key to enable AI features",
     ""
   ],
   about: [
