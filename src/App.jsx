@@ -29,10 +29,11 @@ const COMMAND_MAP = {
     "  <cmd>skills</cmd>    - List my technical skills",
     "  <cmd>projects</cmd>  - View my recent work",
     "  <cmd>experience</cmd>- View my work experience",
-    "  <cmd>github</cmd>    - Fetch live repositories from GitHub API",
-    "  <cmd>contact</cmd>   - How to reach me",
-    "  <cmd>socials</cmd>   - Links to GitHub, LinkedIn, etc.",
-    "  <cmd>theme</cmd>     - Change terminal theme (e.g., 'theme dracula' or 'theme cyberpunk')",
+    "  <cmd>github</cmd>           - Fetch live repositories from GitHub API",
+    "  <cmd>coding profiles</cmd>  - View my competitive coding profiles",
+    "  <cmd>contact</cmd>          - How to reach me",
+    "  <cmd>socials</cmd>   - Links to GitHub, LinkedIn, X, Insta",
+    "  <cmd>theme</cmd>     - Change terminal theme (e.g., 'theme dracula')",
     "  <cmd>clear</cmd>     - Clear the terminal screen",
     "  <cmd>setkey</cmd>    - Set your Gemini API key to enable AI features",
     ""
@@ -94,6 +95,9 @@ const COMMAND_MAP = {
     "GitHub:      <a href='https://github.com/Myself-Praveen' target='_blank' class='link'>github.com/Myself-Praveen</a>",
     "LinkedIn:    <a href='https://www.linkedin.com/in/itz-praveen-mishra' target='_blank' class='link'>linkedin.com/in/itz-praveen-mishra</a>",
     "X (Twitter): <a href='https://x.com/Itz_Praveen_01' target='_blank' class='link'>x.com/Itz_Praveen_01</a>",
+    "Instagram:   <a href='https://www.instagram.com/__myself_praveen_/' target='_blank' class='link'>instagram.com/__myself_praveen_</a>"
+  ],
+  "coding profiles": [
     "LeetCode:    <a href='https://leetcode.com/u/itz_praveen/' target='_blank' class='link'>leetcode.com/u/itz_praveen</a>",
     "CodeChef:    <a href='https://www.codechef.com/users/itz_praveen' target='_blank' class='link'>codechef.com/users/itz_praveen</a>",
     "Codeforces:  <a href='https://codeforces.com/profile/Itz_praveen' target='_blank' class='link'>codeforces.com/profile/Itz_praveen</a>"
@@ -485,6 +489,7 @@ function App() {
           <div className="action-chip" onClick={() => executeCommand('about')}>About</div>
           <div className="action-chip" onClick={() => executeCommand('projects')}>Projects</div>
           <div className="action-chip" onClick={() => executeCommand('skills')}>Skills</div>
+          <div className="action-chip" onClick={() => executeCommand('coding profiles')}>Coding Profiles</div>
           <div className="action-chip" onClick={() => executeCommand('github')}>GitHub API</div>
           <div className="action-chip" onClick={() => executeCommand('clear')}>Clear</div>
         </div>
