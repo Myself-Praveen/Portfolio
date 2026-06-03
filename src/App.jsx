@@ -391,6 +391,16 @@ function App() {
       setHistory([...newHistory, { type: 'output', content: [`<span class='success'>Matrix mode ${!matrixMode ? 'engaged' : 'disabled'}.</span>`] }]);
       return;
     }
+
+    if (normalized === 'escape') {
+      if (matrixMode) {
+        setMatrixMode(false);
+        setHistory([...newHistory, { type: 'output', content: [`<span class='success'>Disconnected from the Matrix. Welcome back to reality.</span>`] }]);
+      } else {
+        setHistory([...newHistory, { type: 'output', content: [`<span class='error'>You are not in the Matrix. There is nothing to escape.</span>`] }]);
+      }
+      return;
+    }
     
     // File system commands
     if (normalized === 'ls') {
