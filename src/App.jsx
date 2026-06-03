@@ -15,6 +15,7 @@ const getLoginMessage = () => {
 const WELCOME_MESSAGE = [
   getLoginMessage(),
   "",
+  "<div class='hub-logo'><span style='color: #ffffff'>Terminal</span><span style='background-color: #ffa31a; color: #000000; padding: 0px 12px; border-radius: 8px; margin-left: 6px'>Hub</span></div>",
   "Welcome to Praveen's Terminal Portfolio (AI-Powered)",
   "Type <cmd>help</cmd> to see a list of commands, or simply ask a question in natural English.",
   "The integrated AI agent will analyze my GitHub and LinkedIn to give you the best answer!",
@@ -90,13 +91,16 @@ const COMMAND_MAP = {
     "Address: Silicon Valley, CA"
   ],
   socials: [
-    "GitHub:   <a href='https://github.com/Myself-Praveen' target='_blank' class='link'>github.com/Myself-Praveen</a>",
-    "LinkedIn: <a href='https://linkedin.com/in/praveen' target='_blank' class='link'>linkedin.com/in/praveen</a>",
-    "Twitter:  <a href='https://twitter.com/praveen' target='_blank' class='link'>@praveen</a>"
+    "GitHub:      <a href='https://github.com/Myself-Praveen' target='_blank' class='link'>github.com/Myself-Praveen</a>",
+    "LinkedIn:    <a href='https://www.linkedin.com/in/itz-praveen-mishra' target='_blank' class='link'>linkedin.com/in/itz-praveen-mishra</a>",
+    "X (Twitter): <a href='https://x.com/Itz_Praveen_01' target='_blank' class='link'>x.com/Itz_Praveen_01</a>",
+    "LeetCode:    <a href='https://leetcode.com/u/itz_praveen/' target='_blank' class='link'>leetcode.com/u/itz_praveen</a>",
+    "CodeChef:    <a href='https://www.codechef.com/users/itz_praveen' target='_blank' class='link'>codechef.com/users/itz_praveen</a>",
+    "Codeforces:  <a href='https://codeforces.com/profile/Itz_praveen' target='_blank' class='link'>codeforces.com/profile/Itz_praveen</a>"
   ],
   theme: [
     "Usage: theme <theme_name>",
-    "Available themes: <cmd>theme default</cmd>, <cmd>theme dracula</cmd>, <cmd>theme ubuntu</cmd>, <cmd>theme hacker</cmd>"
+    "Available themes: <cmd>theme default</cmd>, <cmd>theme dracula</cmd>, <cmd>theme ubuntu</cmd>, <cmd>theme hacker</cmd>, <cmd>theme hub</cmd>"
   ]
 };
 
@@ -144,7 +148,7 @@ function App() {
   
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [theme, setTheme] = useState('default');
+  const [theme, setTheme] = useState('hub');
   const [isThinking, setIsThinking] = useState(false);
   const [sessionKey, setSessionKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || '');
   
@@ -285,12 +289,12 @@ function App() {
 
     if (normalized.startsWith('theme ')) {
       const newTheme = normalized.split(' ')[1];
-      const validThemes = ['default', 'dracula', 'ubuntu', 'hacker', 'synthwave', 'cyberpunk'];
+      const validThemes = ['default', 'dracula', 'ubuntu', 'hacker', 'hub'];
       if (validThemes.includes(newTheme)) {
         setTheme(newTheme);
         setHistory([...newHistory, { type: 'output', content: [`<span class='success'>Theme updated to ${newTheme}</span>`] }]);
       } else {
-        setHistory([...newHistory, { type: 'output', content: ["<span class='error'>Theme not found. Available: default, dracula, ubuntu, hacker, synthwave, cyberpunk</span>"] }]);
+        setHistory([...newHistory, { type: 'output', content: ["<span class='error'>Theme not found. Available: default, dracula, ubuntu, hacker, hub</span>"] }]);
       }
       return;
     }
@@ -380,17 +384,35 @@ function App() {
     });
   };
 
-  const renderPromptPrefix = () => (
-    <div className="prompt-line">
-      <span className="prompt-user">guest</span>
-      <span className="prompt-at">@</span>
-      <span className="prompt-user">praveen</span>
-      <span className="prompt-at">:</span>
-      <span className="prompt-dir">~/portfolio</span>
-      <span className="prompt-git">git:(main)</span>
-      <span className="prompt-arrow">❯</span>
-    </div>
-  );
+  const renderPromptPrefix = () => {
+    if (theme === 'hub') {
+      return (
+        <div className="prompt-line" style={{ fontWeight: 'bold', fontSize: '1.1em' }}>
+          <span style={{ color: '#ffffff' }}>Terminal</span>
+          <span style={{ 
+            backgroundColor: '#ffa31a', 
+            color: '#000000', 
+            padding: '0px 4px', 
+            borderRadius: '4px',
+            marginLeft: '2px',
+            marginRight: '8px'
+          }}>Hub</span>
+          <span className="prompt-arrow">❯</span>
+        </div>
+      );
+    }
+    return (
+      <div className="prompt-line">
+        <span className="prompt-user">guest</span>
+        <span className="prompt-at">@</span>
+        <span className="prompt-user">praveen</span>
+        <span className="prompt-at">:</span>
+        <span className="prompt-dir">~/portfolio</span>
+        <span className="prompt-git">git:(main)</span>
+        <span className="prompt-arrow">❯</span>
+      </div>
+    );
+  };
 
   return (
     <div className="window-container">
