@@ -59,6 +59,47 @@ const MatrixRain = () => {
   return <canvas ref={canvasRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: 0, width: '100vw', height: '100vh', pointerEvents: 'none', backgroundColor: '#000' }} />;
 };
 
+const TypewriterLine = ({ htmlContent, speed = 8, as = "div" }) => {
+  const [displayedHTML, setDisplayedHTML] = useState('');
+  
+  useEffect(() => {
+    let i = 0;
+    let currentHTML = '';
+    
+    const type = () => {
+      if (!htmlContent) return;
+      if (i >= htmlContent.length) return;
+      
+      if (htmlContent[i] === '<') {
+        let tag = '';
+        while (i < htmlContent.length && htmlContent[i] !== '>') {
+          tag += htmlContent[i];
+          i++;
+        }
+        if (i < htmlContent.length) {
+          tag += '>';
+          i++;
+        }
+        currentHTML += tag;
+        setDisplayedHTML(currentHTML);
+        setTimeout(type, 0); 
+      } else {
+        currentHTML += htmlContent[i];
+        setDisplayedHTML(currentHTML);
+        i++;
+        setTimeout(type, speed);
+      }
+    };
+    
+    type();
+  }, [htmlContent, speed]);
+
+  if (as === "span") {
+    return <span dangerouslySetInnerHTML={{ __html: displayedHTML }} />;
+  }
+  return <div dangerouslySetInnerHTML={{ __html: displayedHTML }} />;
+};
+
 const getLoginMessage = () => {
   const date = new Date();
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -578,13 +619,13 @@ function App() {
                   </span>
                 );
               }
-              return <span key={j} dangerouslySetInnerHTML={{ __html: part }} />;
+              return <TypewriterLine key={j} htmlContent={part} speed={8} as="span" />;
             })}
           </div>
         );
       }
       
-      return <div key={i} dangerouslySetInnerHTML={{ __html: processedLine || '&nbsp;' }} />;
+      return <TypewriterLine key={i} htmlContent={processedLine || '&nbsp;'} speed={8} as="div" />;
     });
   };
 
