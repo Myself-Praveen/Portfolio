@@ -59,45 +59,26 @@ const MatrixRain = () => {
   return <canvas ref={canvasRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: 0, width: '100vw', height: '100vh', pointerEvents: 'none', backgroundColor: '#000' }} />;
 };
 
-const TypewriterLine = ({ htmlContent, speed = 8, as = "div" }) => {
-  const [displayedHTML, setDisplayedHTML] = useState('');
+const DelayedLine = ({ htmlContent, delay = 0, as = "div" }) => {
+  const [visible, setVisible] = useState(false);
   
   useEffect(() => {
-    let i = 0;
-    let currentHTML = '';
-    
-    const type = () => {
-      if (!htmlContent) return;
-      if (i >= htmlContent.length) return;
-      
-      if (htmlContent[i] === '<') {
-        let tag = '';
-        while (i < htmlContent.length && htmlContent[i] !== '>') {
-          tag += htmlContent[i];
-          i++;
-        }
-        if (i < htmlContent.length) {
-          tag += '>';
-          i++;
-        }
-        currentHTML += tag;
-        setDisplayedHTML(currentHTML);
-        setTimeout(type, 0); 
-      } else {
-        currentHTML += htmlContent[i];
-        setDisplayedHTML(currentHTML);
-        i++;
-        setTimeout(type, speed);
-      }
-    };
-    
-    type();
-  }, [htmlContent, speed]);
+    if (delay === 0) {
+      setVisible(true);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  if (!visible) return null;
 
   if (as === "span") {
-    return <span dangerouslySetInnerHTML={{ __html: displayedHTML }} />;
+    return <span dangerouslySetInnerHTML={{ __html: htmlContent }} />;
   }
-  return <div dangerouslySetInnerHTML={{ __html: displayedHTML }} />;
+  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 };
 
 const getLoginMessage = () => {
@@ -619,13 +600,13 @@ function App() {
                   </span>
                 );
               }
-              return <TypewriterLine key={j} htmlContent={part} speed={8} as="span" />;
+              return <DelayedLine key={j} htmlContent={part} delay={i * 150} as="span" />;
             })}
           </div>
         );
       }
       
-      return <TypewriterLine key={i} htmlContent={processedLine || '&nbsp;'} speed={8} as="div" />;
+      return <DelayedLine key={i} htmlContent={processedLine || '&nbsp;'} delay={i * 150} as="div" />;
     });
   };
 
