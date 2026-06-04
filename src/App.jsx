@@ -204,9 +204,10 @@ const COMMAND_MAP = {
     "Instagram:   <a href='https://www.instagram.com/__myself_praveen_/' target='_blank' class='link'>instagram.com/__myself_praveen_</a>"
   ],
   "coding profiles": [
-    "LeetCode:    <a href='https://leetcode.com/u/itz_praveen/' target='_blank' class='link'>leetcode.com/u/itz_praveen</a>",
-    "CodeChef:    <a href='https://www.codechef.com/users/itz_praveen' target='_blank' class='link'>codechef.com/users/itz_praveen</a>",
-    "Codeforces:  <a href='https://codeforces.com/profile/Itz_praveen' target='_blank' class='link'>codeforces.com/profile/Itz_praveen</a>"
+    "LeetCode:      <a href='https://leetcode.com/u/itz_praveen/' target='_blank' class='link'>leetcode.com/u/itz_praveen</a>",
+    "GeeksForGeeks: <a href='https://www.geeksforgeeks.org/profile/it5praveen' target='_blank' class='link'>geeksforgeeks.org/profile/it5praveen</a>",
+    "CodeChef:      <a href='https://www.codechef.com/users/itz_praveen' target='_blank' class='link'>codechef.com/users/itz_praveen</a>",
+    "Codeforces:    <a href='https://codeforces.com/profile/Itz_praveen' target='_blank' class='link'>codeforces.com/profile/Itz_praveen</a>"
   ],
   theme: [
     "Usage: theme <theme_name>",
@@ -224,7 +225,7 @@ Context about Praveen:
 - Frameworks/Libraries: PyTorch, TensorFlow, Scikit-learn, HuggingFace, LangChain, React.js, Node.js.
 - Experience: Google Campus Ambassador, EA Sports Virtual Experience (C++ optimization), McKinsey Forward Learning Program.
 - Projects: LUMA Compiler Engine (C, Flex, Bison, RISC-V), CodeSage (Python, LangChain, Ollama, RAG), Fake News Detection Engine (NLP, Scikit-learn), BlunderBot (AI Chess), Umbrella3 (DeFi), Traffic Prediction (ML), API Terminator (AI Agent).
-- Achievements: CodeChef 1487, Codeforces 1200+, NPTEL Generative AI Silver, solved 500+ DSA.
+- Achievements: CodeChef 1487, Codeforces 1200+, NPTEL Generative AI Silver, solved 500+ DSA. Praveen is also highly active on GeeksForGeeks (username: it5praveen).
 - Contact: praveen104685@gmail.com, Kanpur, UP.
 
 Instructions:
@@ -255,7 +256,7 @@ function App() {
   const [theme, setTheme] = useState('hub');
   const [isThinking, setIsThinking] = useState(false);
   // Default AI Key: Put your actual Gemini API key here for local testing
-  const [sessionKey, setSessionKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || "YOUR_API_KEY_HERE");
+  const [sessionKey, setSessionKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || "");
   
   // Draggable window state
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -389,10 +390,48 @@ function App() {
           return;
         }
         
+        let localDynamicPrompt = SYSTEM_PROMPT;
+        try {
+          // Fetch real-time LeetCode and GFG stats in parallel using CORS proxies where needed
+          const [lcRes, ghRes] = await Promise.all([
+            fetch('https://corsproxy.io/?https://leetcode.com/graphql', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                query: `query getUserProfile($username: String!) { matchedUser(username: $username) { submitStats { acSubmissionNum { count } } } }`,
+                variables: { username: 'itz_praveen' }
+              })
+            }),
+            fetch('https://api.github.com/repos/Myself-Praveen/DSA_GFG/commits?per_page=1') // GitHub API has CORS enabled natively
+          ]);
+
+          if (lcRes.ok) {
+            const lcData = await lcRes.json();
+            const totalSolved = lcData?.data?.matchedUser?.submitStats?.acSubmissionNum?.[0]?.count;
+            if (totalSolved) {
+              localDynamicPrompt += `\n\n- LIVE LEETCODE STATS: Praveen has currently solved exactly ${totalSolved} LeetCode problems in real-time. Use this exact number if asked!`;
+            }
+          }
+
+          if (ghRes.ok) {
+            const linkHeader = ghRes.headers.get('link');
+            if (linkHeader) {
+              const match = linkHeader.match(/page=(\d+)>; rel="last"/);
+              if (match && match[1]) {
+                const commits = parseInt(match[1], 10);
+                const gfgSolved = Math.floor(commits / 2);
+                localDynamicPrompt += `\n- LIVE GEEKSFORGEEKS STATS: Praveen has currently solved exactly ${gfgSolved} GeeksForGeeks problems in real-time. Use this exact number if asked!`;
+              }
+            }
+          }
+        } catch (e) {
+          console.log("Local live stats fetch failed:", e);
+        }
+
         const genAI = new GoogleGenerativeAI(sessionKey);
         const model = genAI.getGenerativeModel({ 
           model: "gemini-2.5-flash", 
-          systemInstruction: SYSTEM_PROMPT 
+          systemInstruction: localDynamicPrompt 
         });
         
         const result = await model.generateContent(query);
