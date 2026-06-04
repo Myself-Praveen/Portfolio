@@ -116,7 +116,6 @@ const COMMAND_MAP = {
     "  <cmd>theme</cmd>           - Change terminal theme (e.g., 'theme dracula')",
     "  <cmd>features</cmd>        - View interactive terminal features & easter eggs",
     "  <cmd>clear</cmd>           - Clear the terminal screen",
-    "  <cmd>setkey</cmd>          - Set your Gemini API key to enable AI features",
     ""
   ],
   features: [
@@ -255,7 +254,7 @@ function App() {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [theme, setTheme] = useState('hub');
   const [isThinking, setIsThinking] = useState(false);
-  // Default AI Key: Put your actual Gemini API key here to avoid using setkey
+  // Default AI Key: Put your actual Gemini API key here for local testing
   const [sessionKey, setSessionKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || "YOUR_API_KEY_HERE");
   
   // Draggable window state
@@ -527,13 +526,6 @@ function App() {
       } catch (e) {
         setHistory([...newHistory, { type: 'output', content: [`<span class='error'>Error: ${e.message}</span>`] }]);
       }
-      return;
-    }
-
-    if (normalized.startsWith('setkey ')) {
-      const key = cmdStr.split(' ')[1];
-      setSessionKey(key);
-      setHistory([...newHistory, { type: 'output', content: ["<span class='success'>API Key successfully stored in session!</span>", "Try asking me a question now."] }]);
       return;
     }
 
