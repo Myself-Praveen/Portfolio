@@ -255,7 +255,8 @@ function App() {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [theme, setTheme] = useState('hub');
   const [isThinking, setIsThinking] = useState(false);
-  const [sessionKey, setSessionKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || '');
+  // Default AI Key: Put your actual Gemini API key here to avoid using setkey
+  const [sessionKey, setSessionKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || "YOUR_API_KEY_HERE");
   
   // Draggable window state
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -355,12 +356,13 @@ function App() {
   };
 
   const askAI = async (query, currentHistory) => {
-    if (!sessionKey) {
+    if (!sessionKey || sessionKey === "YOUR_API_KEY_HERE") {
       setHistory([...currentHistory, { 
         type: 'output', 
         content: [
           "<span class='error'>[AI Offline] Missing API Key.</span>",
-          "Please type <cmd>setkey YOUR_GEMINI_API_KEY</cmd> to enable the AI agent."
+          "Please open <cmd>src/App.jsx</cmd> and replace 'YOUR_API_KEY_HERE' on line 258 with your actual Gemini API key.",
+          "Or, set the <cmd>VITE_GEMINI_API_KEY</cmd> environment variable in your Vercel project."
         ] 
       }]);
       return;
@@ -734,7 +736,6 @@ function App() {
           <div className="action-chip" onClick={() => executeCommand('projects')}>Projects</div>
           <div className="action-chip" onClick={() => executeCommand('skills')}>Skills</div>
           <div className="action-chip" onClick={() => executeCommand('coding profiles')}>Coding Profiles</div>
-          <div className="action-chip" onClick={() => executeCommand('github')}>GitHub API</div>
           <div className="action-chip" onClick={() => executeCommand('clear')}>Clear</div>
         </div>
       </div>
