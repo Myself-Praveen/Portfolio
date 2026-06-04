@@ -356,29 +356,51 @@ function App() {
   };
 
   const askAI = async (query, currentHistory) => {
-    if (!sessionKey || sessionKey === "YOUR_API_KEY_HERE") {
-      setHistory([...currentHistory, { 
-        type: 'output', 
-        content: [
-          "<span class='error'>[AI Offline] Missing API Key.</span>",
-          "Please open <cmd>src/App.jsx</cmd> and replace 'YOUR_API_KEY_HERE' on line 258 with your actual Gemini API key.",
-          "Or, set the <cmd>VITE_GEMINI_API_KEY</cmd> environment variable in your Vercel project."
-        ] 
-      }]);
-      return;
-    }
-
     setIsThinking(true);
+    
     try {
-      const genAI = new GoogleGenerativeAI(sessionKey);
-      const model = genAI.getGenerativeModel({ 
-        model: "gemini-2.5-flash", 
-        systemInstruction: SYSTEM_PROMPT 
-      });
+      let responseText = "";
       
-      const result = await model.generateContent(query);
-      const text = result.response.text();
-      const responseLines = text.split('\n').filter(line => line.trim() !== '');
+      try {
+        // Try to securely fetch from our new serverless backend
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query, systemPrompt: SYSTEM_PROMPT })
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          responseText = data.text;
+        } else {
+          throw new Error('Serverless backend not reachable or returned error.');
+        }
+      } catch (err) {
+        // Fallback to local client-side key if backend fails (e.g. running local dev server without Vercel CLI)
+        if (!sessionKey || sessionKey === "YOUR_API_KEY_HERE") {
+          setHistory([...currentHistory, { 
+            type: 'output', 
+            content: [
+              "<span class='error'>[AI Offline] Missing API Key.</span>",
+              "Please configure your Vercel Environment Variables with <cmd>GEMINI_API_KEY</cmd> to enable the secure serverless AI backend.",
+              "Or, for local testing, paste your key into <cmd>src/App.jsx</cmd> on line 258."
+            ] 
+          }]);
+          setIsThinking(false);
+          return;
+        }
+        
+        const genAI = new GoogleGenerativeAI(sessionKey);
+        const model = genAI.getGenerativeModel({ 
+          model: "gemini-2.5-flash", 
+          systemInstruction: SYSTEM_PROMPT 
+        });
+        
+        const result = await model.generateContent(query);
+        responseText = await result.response.text();
+      }
+      
+      const responseLines = responseText.split('\n').filter(line => line.trim() !== '');
       
       setHistory(prev => [...prev, { 
         type: 'output', 
