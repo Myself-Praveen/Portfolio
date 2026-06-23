@@ -106,11 +106,14 @@ const COMMAND_MAP = {
   help: [
     "Available commands:",
     "  <cmd>about</cmd>           - Learn more about me",
+    "  <cmd>education</cmd>       - Academic background & coursework",
     "  <cmd>skills</cmd>          - List my technical skills",
     "  <cmd>projects</cmd>        - View my recent work",
     "  <cmd>experience</cmd>      - View my work experience",
+    "  <cmd>achievements</cmd>    - Awards, ratings & milestones",
     "  <cmd>github</cmd>          - Fetch live repositories from GitHub API",
     "  <cmd>coding profiles</cmd> - View my competitive coding profiles",
+    "  <cmd>resume</cmd>          - View or download my resume",
     "  <cmd>contact</cmd>         - How to reach me",
     "  <cmd>socials</cmd>         - Links to GitHub, LinkedIn, X, Insta",
     "  <cmd>theme</cmd>           - Change terminal theme (e.g., 'theme dracula')",
@@ -123,13 +126,17 @@ const COMMAND_MAP = {
     "  <cmd>ls</cmd>              - List directory contents",
     "  <cmd>cd</cmd>              - Change directory (e.g., 'cd projects')",
     "  <cmd>cat</cmd>             - Read a file (e.g., 'cat about.txt')",
+    "  <cmd>pwd</cmd>             - Print current working directory",
+    "  <cmd>whoami</cmd>          - Display current user identity",
+    "  <cmd>neofetch</cmd>        - Display system information",
+    "  <cmd>history</cmd>         - View command history",
     "  <cmd>matrix</cmd>          - Enter the Matrix",
     "  <cmd>escape</cmd>          - Escape the Matrix",
     "  <cmd>sudo rm -rf /</cmd>   - Do not run this.",
     ""
   ],
   about: [
-    "I am Praveen Mishra, a passionate Software Engineer and B.Tech CSE student at IIITDM Kurnool (CGPA: 8.21).",
+    "I am Praveen Mishra, a passionate Software Engineer and B.Tech CSE student at IIITDM Kurnool (CGPA: 8.00).",
     "I specialize in Full-Stack Development, AI/ML Pipelines, and Systems Architecture.",
     "Beyond coding, I've served as a Google Campus Ambassador, evangelizing Gemini AI, and I play Table Tennis for my institute.",
     "",
@@ -146,49 +153,37 @@ const COMMAND_MAP = {
   projects: [
     "Here are my recent projects:",
     "<br/>",
-    "<strong>LUMA Compiler Engine</strong>",
-    "Engineered a complete 7-phase compiler from scratch in C, translating a custom C-like language into executable 32-bit RISC-V assembly.",
-    "<em>Tech: C, Flex, Bison, AST, RISC-V Assembly</em>",
-    "<br/>",
     "<strong>CodeSage – AI Code Analysis Assistant</strong>",
-    "Architected a CLI code-analysis assistant utilizing local LLMs via Ollama and a RAG pipeline with LangChain/FAISS.",
+    "Built an AI-powered CLI assistant using Ollama local LLMs for code refactoring, and engineered a LangChain/FAISS RAG pipeline.",
     "<em>Tech: Python, LangChain, Ollama, RAG, FAISS</em>",
+    "<a href='https://github.com/Myself-Praveen/Code_Sage' target='_blank' class='link'>View Source</a> | <a href='https://www.youtube.com/watch?v=VU2RdymCOhA' target='_blank' class='link'>Demo Video</a>",
     "<br/>",
-    "<strong>Fake News Detection Engine</strong>",
-    "Engineered an NLP classification engine using TF-IDF vectorization and Scikit-learn, achieving 92% accuracy.",
-    "<em>Tech: Python, Scikit-learn, TF-IDF, NLTK, Pandas</em>",
+    "<strong>Retriever -- Full-Stack Lost-and-Found System</strong>",
+    "Architected a FastAPI/React platform with WebSockets and integrated Gemini Vision for 95%+ accurate tagging.",
+    "<em>Tech: React 19, FastAPI, WebSockets, MongoDB, Redis, Google Gemini Vision API</em>",
+    "<a href='https://github.com/Myself-Praveen/Retriver' target='_blank' class='link'>View Source</a> | <a href='https://retriver-iota.vercel.app/' target='_blank' class='link'>Live Demo</a>",
     "<br/>",
-    "<strong>BlunderBot Chess Engine</strong>",
-    "Distributed AI chess platform featuring semantic board search using custom autoencoders and a Neo4j GraphRAG opening pipeline.",
-    "<br/>",
-    "<strong>Umbrella3 DeFi Infrastructure</strong>",
-    "A blockchain-based disaster relief vault system utilizing Solidity smart contracts and Chainlink oracles.",
-    "<br/>",
-    "<strong>Traffic Demand Prediction Pipeline</strong>",
-    "An advanced spatial-temporal stacking ensemble (LightGBM/XGBoost/CatBoost) built for the HackerEarth Gridlock Hackathon.",
-    "<br/>",
-    "<strong>API Waste Terminator</strong>",
-    "An autonomous agent integrated with GitLab to detect leaked API keys and optimize expensive LLM prompts.",
+    "<strong>AI-Powered Terminal Portfolio</strong>",
+    "Developed an interactive React.js UNIX terminal integrated with Google Gemini LLM via Vercel Serverless.",
+    "<em>Tech: React.js, Node.js, Vercel Serverless, Google Gemini API</em>",
+    "<a href='https://github.com/Myself-Praveen/Portfolio' target='_blank' class='link'>View Source</a> | <a href='https://praveen7928.vercel.app' target='_blank' class='link'>Live Demo</a>",
     "<br/>",
     "Type <cmd>cd projects</cmd> then <cmd>ls</cmd> to view files, or check my <cmd>github</cmd>!"
   ],
   experience: [
     "Work Experience & Leadership:",
     "<br/>",
+    "<strong>LangChain (Open Source Contributor)</strong> (May 2026 - Jun 2026)",
+    "Implemented Pydantic Structured Output for HuggingFace models, accelerating validation workflows.",
+    "<br/>",
+    "<strong>McKinsey Forward Learning Program</strong> (Nov 2025 - Dec 2025)",
+    "Mastered strategic business analysis and applied standard analytical frameworks across real-world cases.",
+    "<br/>",
+    "<strong>Software Engineering Virtual Experience (EA Sports)</strong> (Mar 2025 - Apr 2025)",
+    "Patched critical C++ memory leaks optimizing execution overhead by 15%, and designed modular object class definitions.",
+    "<br/>",
     "<strong>Google Campus Ambassador</strong> (Aug 2025 - Dec 2025)",
-    "Drove Google Gemini adoption across campus by conducting 3+ hands-on workshops and hackathons, onboarding 100+ students.",
-    "<br/>",
-    "<strong>Software Engineering Virtual Experience (EA Sports)</strong> (Apr 2025)",
-    "Patched a critical C++ memory leak optimizing execution overhead by 15%, and designed modular object class definitions.",
-    "<br/>",
-    "<strong>McKinsey Forward Learning Program</strong> (Dec 2025)",
-    "Applied structured analytical frameworks and formulated data-driven insights across real-world business case simulations.",
-    "<br/>",
-    "<strong>Sub Coordinator - Ledger Labs (Web3 Club)</strong>",
-    "Organize Web3 technical sessions and drive awareness of decentralized technologies.",
-    "<br/>",
-    "<strong>Vice Captain - Institute Table Tennis Team</strong>",
-    "Coordinate weekly training schedules for Inter-IIIT sports tournaments."
+    "Drove Google Gemini adoption across campus by conducting 3+ hands-on workshops and hackathons, onboarding 100+ students."
   ],
   contact: [
     "Let's build something awesome together!",
@@ -209,6 +204,102 @@ const COMMAND_MAP = {
     "CodeChef:      <a href='https://www.codechef.com/users/itz_praveen' target='_blank' class='link'>codechef.com/users/itz_praveen</a>",
     "Codeforces:    <a href='https://codeforces.com/profile/Itz_praveen' target='_blank' class='link'>codeforces.com/profile/Itz_praveen</a>"
   ],
+  education: [
+    "Academic Background:",
+    "<br/>",
+    "<strong>B.Tech in Computer Science and Engineering</strong>",
+    "Indian Institute of Information Technology Design and Manufacturing (IIITDM), Kurnool",
+    "Batch: 2024 - 2028 | CGPA: <span class='highlight'>8.00/10</span>",
+    "<br/>",
+    "<strong>Class 12 (Senior Secondary)</strong>",
+    "Dr. V.S.E.C, Kanpur, UP | <span class='highlight'>93.2%</span> (2022 - 2023)",
+    "<br/>",
+    "<strong>Class 10 (Secondary)</strong>",
+    "Dr. V.S.E.C, Kanpur, UP | <span class='highlight'>98%</span> (2020 - 2021)",
+    "<br/>",
+    "<span class='highlight'>Relevant Coursework:</span>",
+    "  Data Structures & Algorithms, Object-Oriented Programming, Compiler Design,",
+    "  Database Management Systems, Computer Networks, Operating Systems,",
+    "  Machine Learning, Natural Language Processing"
+  ],
+  achievements: [
+    "Awards & Milestones:",
+    "<br/>",
+    "<span class='highlight'>Competitive Programming:</span>",
+    "  <a href='https://www.codechef.com/users/itz_praveen' target='_blank' class='link'>CodeChef</a> Rating: <strong>1525</strong> (Global Rank <strong>414</strong> in Starters 225)",
+    "  <a href='https://codeforces.com/profile/Itz_praveen' target='_blank' class='link'>Codeforces</a> Rating: <strong>1265</strong> (Pupil)",
+    "  <a href='https://leetcode.com/u/itz_praveen/' target='_blank' class='link'>LeetCode</a> Rating: <strong>~1700</strong>",
+    "  Total DSA Problems Solved: <strong>500+</strong> across all platforms",
+    "  (Ask the AI for live <a href='https://leetcode.com/u/itz_praveen/' target='_blank' class='link'>LeetCode</a> & <a href='https://www.geeksforgeeks.org/profile/it5praveen' target='_blank' class='link'>GFG</a> counts!)",
+    "<br/>",
+    "<span class='highlight'>Academics:</span>",
+    "  <strong>JEE Mains:</strong> Secured <strong>98.2 percentile</strong> (Top 2% among 1.6M candidates)",
+    "<br/>",
+    "<span class='highlight'>Certifications & Recognition:</span>",
+    "  NPTEL Generative AI — <strong>Elite Silver (Top 5% nationwide)</strong>",
+    "  Google Campus Ambassador (2025)",
+    "  <a href='https://www.credly.com/badges/5e997a98-35ef-4940-9867-feb6137b2251/public_url' target='_blank' class='link'>McKinsey Forward</a> Learning Program Graduate",
+    "<br/>",
+    "<span class='highlight'>Competitions:</span>",
+    "  Secured <strong>6th out of 50+ teams</strong> in DATATHON 2.0, IIITDM Kurnool",
+    "<br/>",
+    "<span class='highlight'>Leadership:</span>",
+    "  Vice Captain — Institute Table Tennis Team (<a href='https://drive.google.com/file/d/1C7Q7N7KKpck2CeOPk3FfjGqhmQei5pP0/view' target='_blank' class='link'>Certificate</a>)",
+    "  Sub Coordinator — Ledger Labs (Web3 Club)"
+  ],
+  whoami: [
+    "",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*:........:*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=................-%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@......................@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@+........................+@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@=..........................=@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@%#@%%@@@@@@@@@@##%@#@%#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@.##.#@@@@@@@#..+@@.+@.-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@#.#@--@::@@@@#:.....*@+.@+.@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@#............................#@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@...........................:@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@..........................@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@-......................:@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#....................#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+..............+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=--=%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%-:..............:-%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@%..........................#@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@#................................%@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@:....................................:@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@+........................................=@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@#............................................#@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@#..............................................#@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@#................................................#@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@*............................................*@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@#=....................................-#@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@#+............................+#@@@@@@@@@@@@@@@@@@@@@@@@",
+    "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%=..............=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",
+    "",
+    "  <span class='highlight'>praveen</span>@iiitdm-kurnool",
+    "  -------------------------",
+    "  <span class='highlight'>Name:</span>      Praveen Mishra",
+    "  <span class='highlight'>Role:</span>      Software Engineer | AI/ML Enthusiast",
+    "  <span class='highlight'>Education:</span> B.Tech CSE, IIITDM Kurnool (2024-2028)",
+    "  <span class='highlight'>CGPA:</span>      8.00/10",
+    "  <span class='highlight'>Interests:</span> Compilers, AI Agents, Systems Architecture, DeFi",
+    "  <span class='highlight'>Location:</span>  Kanpur, UP, India",
+    ""
+  ],
+  resume: [
+    "Praveen Mishra — Software Engineer",
+    "<br/>",
+    "<span class='highlight'>Education:</span>     B.Tech CSE, IIITDM Kurnool (CGPA: 8.00)",
+    "<span class='highlight'>Experience:</span>    LangChain Contributor | McKinsey Forward | EA Sports VE | Google Campus Ambassador",
+    "<span class='highlight'>Languages:</span>     C, C++, Python, JS, SQL, RISC-V Assembly, Bash",
+    "<span class='highlight'>Frameworks:</span>    PyTorch, TensorFlow, LangChain, React.js, Node.js",
+    "<span class='highlight'>Key Projects:</span>  CodeSage | Retriever | AI-Powered Terminal Portfolio",
+    "<br/>",
+    "View Full Profile: <a href='https://www.linkedin.com/in/itz-praveen-mishra' target='_blank' class='link'>LinkedIn</a>",
+    "Download PDF:      <a href='/resume.pdf' target='_blank' class='link'>resume.pdf</a>"
+  ],
   theme: [
     "Usage: theme <theme_name>",
     "Available themes: <cmd>theme default</cmd>, <cmd>theme dracula</cmd>, <cmd>theme ubuntu</cmd>, <cmd>theme hacker</cmd>, <cmd>theme hub</cmd>"
@@ -220,12 +311,12 @@ const COMMAND_LIST = Object.keys(COMMAND_MAP);
 const SYSTEM_PROMPT = `You are the AI assistant built into the terminal portfolio of Praveen Mishra, a passionate Software Engineer and Hackathon Enthusiast. 
 Your job is to answer questions about Praveen based on his resume, GitHub, and LinkedIn profile context.
 Context about Praveen:
-- Education: B.Tech in Computer Science and Engineering at IIITDM Kurnool (2024-2028, CGPA: 8.21).
+- Education: B.Tech in Computer Science and Engineering at IIITDM Kurnool (2024-2028, CGPA: 8.00).
 - Languages: C, C++, Python, SQL, JavaScript, HTML, CSS, RISC-V Assembly, Bash.
 - Frameworks/Libraries: PyTorch, TensorFlow, Scikit-learn, HuggingFace, LangChain, React.js, Node.js.
-- Experience: Google Campus Ambassador, EA Sports Virtual Experience (C++ optimization), McKinsey Forward Learning Program.
-- Projects: LUMA Compiler Engine (C, Flex, Bison, RISC-V), CodeSage (Python, LangChain, Ollama, RAG), Fake News Detection Engine (NLP, Scikit-learn), BlunderBot (AI Chess), Umbrella3 (DeFi), Traffic Prediction (ML), API Terminator (AI Agent).
-- Achievements: CodeChef 1487, Codeforces 1200+, NPTEL Generative AI Silver, solved 500+ DSA. Praveen is also highly active on GeeksForGeeks (username: it5praveen).
+- Experience: LangChain Open Source Contributor, McKinsey Forward Learning Program, EA Sports Virtual Experience (C++ optimization), Google Campus Ambassador.
+- Projects: CodeSage (Python, LangChain, Ollama, RAG), Retriever - Full-Stack Lost-and-Found System (React 19, FastAPI, WebSockets), AI-Powered Terminal Portfolio (React.js, Node.js, Vercel Serverless, Gemini API), LUMA Compiler Engine, BlunderBot.
+- Achievements: CodeChef 1525, Codeforces 1265, LeetCode ~1700, JEE Mains 98.2 percentile, NPTEL Generative AI Silver, solved 500+ DSA. Praveen is also highly active on GeeksForGeeks (username: it5praveen).
 - Contact: praveen104685@gmail.com, Kanpur, UP.
 
 Instructions:
@@ -271,20 +362,46 @@ function App() {
   
   const DIRECTORY_STRUCTURE = {
     '~': ['projects/', 'skills.txt', 'about.txt', 'experience.txt'],
-    '~/projects': ['luma_compiler.txt', 'codesage.txt', 'fake_news.txt', 'blunderbot.txt', 'umbrella3.txt', 'traffic.txt', 'api_terminator.txt']
+    '~/projects': ['codesage.txt', 'retriever.txt', 'portfolio.txt']
   };
 
   const FILE_CONTENTS = {
     '~/about.txt': COMMAND_MAP.about,
     '~/skills.txt': COMMAND_MAP.skills,
     '~/experience.txt': COMMAND_MAP.experience,
-    '~/projects/luma_compiler.txt': ["<span class='highlight'>LUMA Compiler Engine</span>", "Engineered a complete 7-phase compiler from scratch in C, translating a custom C-like language into executable 32-bit RISC-V assembly."],
-    '~/projects/codesage.txt': ["<span class='highlight'>CodeSage – AI Code Analysis Assistant</span>", "Architected a CLI code-analysis assistant utilizing local LLMs via Ollama and a RAG pipeline."],
-    '~/projects/fake_news.txt': ["<span class='highlight'>Fake News Detection Engine</span>", "NLP classification engine analyzing 20,000+ unstructured news articles using TF-IDF and Scikit-learn."],
-    '~/projects/blunderbot.txt': ["<span class='highlight'>BlunderBot Chess Engine</span>", "Distributed AI chess platform with Neo4j GraphRAG and FastAPI."],
-    '~/projects/umbrella3.txt': ["<span class='highlight'>Umbrella3 DeFi Infrastructure</span>", "Smart contract development with Solidity/Hardhat."],
-    '~/projects/traffic.txt': ["<span class='highlight'>Traffic Demand Prediction Pipeline</span>", "Stacking ensemble achieving 93.12 R2 score."],
-    '~/projects/api_terminator.txt': ["<span class='highlight'>API Waste Terminator</span>", "Autonomous agent scanning codebases for leaked API keys."]
+    '~/projects/codesage.txt': [
+      "<span class='highlight'>CodeSage – AI Code Analysis Assistant</span>",
+      "",
+      "Built an AI-powered CLI assistant using Ollama local LLMs for code refactoring",
+      "and engineered a LangChain/FAISS RAG pipeline indexing 50+ core files.",
+      "",
+      "<span class='highlight'>Tech:</span>       Python, LangChain, Ollama, RAG, FAISS",
+      "<span class='highlight'>Features:</span>   Codebase indexing, semantic search, local inference",
+      "",
+      "<a href='https://github.com/Myself-Praveen/Code_Sage' target='_blank' class='link'>View Source on GitHub</a> | <a href='https://www.youtube.com/watch?v=VU2RdymCOhA' target='_blank' class='link'>Demo Video</a>"
+    ],
+    '~/projects/retriever.txt': [
+      "<span class='highlight'>Retriever -- Full-Stack Lost-and-Found System</span>",
+      "",
+      "Architected a FastAPI/React platform with WebSockets, supporting 1K+ users",
+      "and integrated Gemini Vision for 95%+ accurate tagging and React-Leaflet for precise tracking.",
+      "",
+      "<span class='highlight'>Tech:</span>       React 19, FastAPI, WebSockets, MongoDB, Redis, Gemini API",
+      "<span class='highlight'>Features:</span>   Real-time chat, AI image tagging, interactive map",
+      "",
+      "<a href='https://github.com/Myself-Praveen/Retriver' target='_blank' class='link'>View Source on GitHub</a> | <a href='https://retriver-iota.vercel.app/' target='_blank' class='link'>Live Demo</a>"
+    ],
+    '~/projects/portfolio.txt': [
+      "<span class='highlight'>AI-Powered Terminal Portfolio</span>",
+      "",
+      "Developed an interactive React.js UNIX terminal with 5+ bash commands",
+      "and integrated Google Gemini LLM via secure Vercel Serverless proxies.",
+      "",
+      "<span class='highlight'>Tech:</span>       React.js, Node.js, Vercel Serverless, Google Gemini API",
+      "<span class='highlight'>Features:</span>   Interactive commands, AI agent, filesystem simulation",
+      "",
+      "<a href='https://github.com/Myself-Praveen/Portfolio' target='_blank' class='link'>View Source on GitHub</a> | <a href='https://praveen7928.vercel.app' target='_blank' class='link'>Live Demo</a>"
+    ]
   };
   
   const inputRef = useRef(null);
@@ -366,7 +483,7 @@ function App() {
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, systemPrompt: SYSTEM_PROMPT })
+          body: JSON.stringify({ query })
         });
         
         if (res.ok) {
@@ -537,6 +654,38 @@ function App() {
       } else {
         setHistory([...newHistory, { type: 'output', content: [`<span class='error'>cat: ${file}: No such file</span>`] }]);
       }
+      return;
+    }
+
+    if (normalized === 'pwd') {
+      setHistory([...newHistory, { type: 'output', content: [currentDir] }]);
+      return;
+    }
+
+    if (normalized === 'history') {
+      const histLines = commandHistory.map((cmd, i) => `  ${i + 1}  ${cmd}`);
+      setHistory([...newHistory, { type: 'output', content: histLines.length ? histLines : ["No commands in history."] }]);
+      return;
+    }
+
+    if (normalized === 'neofetch') {
+      const uptime = Math.floor((Date.now() - performance.timeOrigin) / 1000);
+      const uptimeStr = uptime > 60 ? `${Math.floor(uptime / 60)}m ${uptime % 60}s` : `${uptime}s`;
+      setHistory([...newHistory, { type: 'output', content: [
+        "",
+        "<span class='highlight'>praveen</span>@<span class='highlight'>terminal-hub</span>",
+        "-------------------------",
+        `<span class='highlight'>OS:</span>        Portfolio v3.0`,
+        `<span class='highlight'>Host:</span>      IIITDM Kurnool`,
+        `<span class='highlight'>Shell:</span>     TerminalHub AI Shell`,
+        `<span class='highlight'>Terminal:</span>  Glassmorphism CRT v2`,
+        `<span class='highlight'>Theme:</span>     ${theme}`,
+        `<span class='highlight'>Uptime:</span>    ${uptimeStr}`,
+        `<span class='highlight'>Packages:</span>  7 projects installed`,
+        `<span class='highlight'>Languages:</span> C, C++, Python, JS, SQL, RISC-V`,
+        `<span class='highlight'>AI Model:</span>  Gemini 2.5 Flash`,
+        ""
+      ] }]);
       return;
     }
 
@@ -788,7 +937,10 @@ function App() {
           <div className="action-chip" onClick={() => executeCommand('about')}>About</div>
           <div className="action-chip" onClick={() => executeCommand('projects')}>Projects</div>
           <div className="action-chip" onClick={() => executeCommand('skills')}>Skills</div>
+          <div className="action-chip" onClick={() => executeCommand('achievements')}>Achievements</div>
           <div className="action-chip" onClick={() => executeCommand('coding profiles')}>Coding Profiles</div>
+          <div className="action-chip" onClick={() => executeCommand('resume')}>Resume</div>
+          <div className="action-chip" onClick={() => executeCommand('features')}>Features</div>
           <div className="action-chip" onClick={() => executeCommand('clear')}>Clear</div>
         </div>
       </div>

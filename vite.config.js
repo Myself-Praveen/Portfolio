@@ -5,5 +5,4 @@ export default defineConfig({
   plugins: [
     react(),
   ],
-  assetsInclude: ['**/*.glb', '**/*.gltf'],
 });
