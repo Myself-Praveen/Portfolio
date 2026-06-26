@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const SYSTEM_PROMPT = `You are the AI assistant built into the terminal portfolio of Praveen Mishra, a passionate Software Engineer and Hackathon Enthusiast. 
 Your job is to answer questions about Praveen based on his resume, GitHub, and LinkedIn profile context.
 Context about Praveen:
-- Education: B.Tech in Computer Science and Engineering at IIITDM Kurnool (2024-2028, CGPA: 8.21).
+- Education: B.Tech in Computer Science and Engineering at IIITDM Kurnool (2024-2028, CGPA: 8.21). He is currently in his third year (pre-final year) of college.
 - Languages: C, C++, Python, SQL, JavaScript, HTML, CSS, RISC-V Assembly, Bash.
 - Frameworks/Libraries: PyTorch, TensorFlow, Scikit-learn, HuggingFace, LangChain, React.js, Node.js.
 - Experience: Google Campus Ambassador, EA Sports Virtual Experience (C++ optimization), McKinsey Forward Learning Program.
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   }
 
   const { query } = req.body;
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
 
   if (!apiKey) {
     return res.status(500).json({ error: "Server API Key not configured." });
