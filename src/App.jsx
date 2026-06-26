@@ -129,6 +129,7 @@ const COMMAND_MAP = {
     "  <cmd>pwd</cmd>             - Print current working directory",
     "  <cmd>whoami</cmd>          - Display current user identity",
     "  <cmd>neofetch</cmd>        - Display system information",
+    "  <cmd>theme</cmd>           - Change terminal theme (e.g., 'theme dracula')",
     "  <cmd>history</cmd>         - View command history",
     "  <cmd>matrix</cmd>          - Enter the Matrix",
     "  <cmd>escape</cmd>          - Escape the Matrix",
@@ -311,7 +312,7 @@ const COMMAND_LIST = Object.keys(COMMAND_MAP);
 const SYSTEM_PROMPT = `You are the AI assistant built into the terminal portfolio of Praveen Mishra, a passionate Software Engineer and Hackathon Enthusiast. 
 Your job is to answer questions about Praveen based on his resume, GitHub, and LinkedIn profile context.
 Context about Praveen:
-- Education: B.Tech in Computer Science and Engineering at IIITDM Kurnool (2024-2028, CGPA: 8.00).
+- Education: B.Tech in Computer Science and Engineering at IIITDM Kurnool (2024-2028, CGPA: 8.00). He is currently in his third year (pre-final year) of college.
 - Languages: C, C++, Python, SQL, JavaScript, HTML, CSS, RISC-V Assembly, Bash.
 - Frameworks/Libraries: PyTorch, TensorFlow, Scikit-learn, HuggingFace, LangChain, React.js, Node.js.
 - Experience: LangChain Open Source Contributor, McKinsey Forward Learning Program, EA Sports Virtual Experience (C++ optimization), Google Campus Ambassador.
@@ -490,7 +491,8 @@ function App() {
           const data = await res.json();
           responseText = data.text;
         } else {
-          throw new Error('Serverless backend not reachable or returned error.');
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || 'Serverless backend not reachable or returned error.');
         }
       } catch (err) {
         // Fallback to local client-side key if backend fails (e.g. running local dev server without Vercel CLI)
@@ -498,7 +500,7 @@ function App() {
           setHistory([...currentHistory, { 
             type: 'output', 
             content: [
-              "<span class='error'>[AI Offline] Missing API Key.</span>",
+              `<span class='error'>[AI Offline] Error: ${err.message}</span>`,
               "Please configure your Vercel Environment Variables with <cmd>GEMINI_API_KEY</cmd> to enable the secure serverless AI backend.",
               "Or, for local testing, paste your key into <cmd>src/App.jsx</cmd> on line 258."
             ] 
